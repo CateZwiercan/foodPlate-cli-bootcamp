@@ -1,5 +1,3 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    background-color: orange;
+    border-bottom: 3px solid black;
 }
