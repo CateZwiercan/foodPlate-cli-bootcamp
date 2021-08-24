@@ -17,6 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit (){
     this.titleService.setTitle('Welcome to FoodPlate');
-    this.userService.getUser();
+    this.user = this.userService.getUser();
   }
 }
