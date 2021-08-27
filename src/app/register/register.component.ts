@@ -5,7 +5,7 @@ import { User } from '../models/User';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'fp-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -26,28 +26,35 @@ export class RegisterComponent implements OnInit {
                   'firstname' : [null, [Validators.required]],
                   'email' : [null, [Validators.compose([Validators.required, Validators.email])]],
                   'gender' : [null, [Validators.required]],
-                  'ageGroup' : [null, [Validators.required]]
-                })
+                  'ageGroup' : [null, [Validators.required]],
+                }, {updateOn: 'submit'})
               }
 
   
-  onSubmit(formValues) {
-    const currentUser = this.regForm.value;
-    this.currentUser = currentUser;
-    console.log(this.regForm.value);
-    this.currentUser.id = 1;
-    this.currentUser.registered = true;
-    this.currentUser.reqsStatus = {
-      fruitMet: false,
-      vegMet: false,
-      proteinMet: false,
-      grainMet: false
-    };
-    localStorage.setItem('User', JSON.stringify(currentUser));
+  // onSubmit(formValues) {
+  //   const currentUser = this.regForm.value;
+  //   this.currentUser = currentUser;
+  //   console.log(this.regForm.value);
+  //   this.currentUser.id = 1;
+  //   this.currentUser.registered = true;
+  //   this.currentUser.reqsStatus = {
+  //     fruitMet: false,
+  //     vegMet: false,
+  //     proteinMet: false,
+  //     grainMet: false
+  //   };
+  //   localStorage.setItem('User', JSON.stringify(currentUser));
 
+  // }
+
+  onSubmit(formValues) {
+    this.userService.updateUser(formValues);
+    UserService.storeUserLocal(formValues);
   }
 
   ngOnInit(): void {
+    this.userService.currentUser.subscribe(user => this.currentUser = user);
+    this.regForm.valueChanges.subscribe(value => console.log(value))
   }
 
 }

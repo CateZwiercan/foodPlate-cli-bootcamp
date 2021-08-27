@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodaysGoalService } from '../services/todays-goal.service';
 
 @Component({
-  selector: 'app-todays-goal',
+  selector: 'fp-todays-goal',
   templateUrl: './todays-goal.component.html',
   styleUrls: ['./todays-goal.component.css']
 })
@@ -23,7 +23,7 @@ export class TodaysGoalComponent implements OnInit {
   clearGoal() {
     this.todaysGoalService.clearGoal();
   }
-  
+
   constructor(private todaysGoalService: TodaysGoalService) { }
 
   ngOnInit(): void {

@@ -20,6 +20,10 @@ export class FooterComponent implements OnInit {
     alert('For more info see, choosemyplate.gov');
   }
 
+  clearGoal() {
+    this.todaysGoalService.clearGoal();
+  }
+
   constructor(private todaysGoalService: TodaysGoalService) { 
     this.subscription = this.todaysGoalService.getGoal().subscribe(goal => {
       this.goal = goal;
