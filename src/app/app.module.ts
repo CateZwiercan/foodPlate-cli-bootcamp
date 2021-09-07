@@ -21,6 +21,7 @@ import { ExercisesComponent } from './exercises/exercises.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TodaysGoalComponent } from './todays-goal/todays-goal.component';
 import { FoodComponent } from './food/food.component';
+import { DoublePipe } from './shared/double.pipe';
 
 
 
@@ -38,7 +39,7 @@ import { FoodComponent } from './food/food.component';
     FarmersMarketsComponent,
     ExercisesComponent,
     TodaysGoalComponent,
-    FoodComponent ],
+    FoodComponent],
   imports: [
     CommonModule,
     BrowserModule,
