@@ -1,5 +1,7 @@
 <section>
-    <img *ngFor="let group of foodGroups; first as isFirst; last as isLast"
-        src=" {{ group.icon }}" alt="group.name"
-        [class.isFirst]="isLast" (click)="showGroup(group)">
+    <img *ngFor="let group of foodGroups"
+        src=" {{ group.icon }}" 
+        alt="{{group.name}}"
+        ngStyle]="iconStyles" 
+        (click)="showGroup(group)">
 </section>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
@@ -18,38 +18,28 @@ export class RegisterComponent implements OnInit {
   ];
 
   regForm: FormGroup;
+  submit: boolean;
+  router: Router;
 
-  constructor(private userService: UserService,
-              private fb: FormBuilder,
-              private router: Router) {
-                this.regForm = fb.group({
-                  'firstname' : [null, [Validators.required]],
-                  'email' : [null, [Validators.compose([Validators.required, Validators.email])]],
-                  'gender' : [null, [Validators.required]],
-                  'ageGroup' : [null, [Validators.required]],
-                }, {updateOn: 'submit'})
+  canDeactivate(): boolean {
+    console.log(!this.regForm.touched);
+    return !this.regForm.touched || this.submit;
+  }
+
+  constructor(private userService: UserService) {
+                this.regForm = new FormGroup({
+                  firstname : new FormControl(null, [Validators.required, Validators.email]),
+                  email : new FormControl(null, [Validators.required]),
+                  gender : new FormControl(null, [Validators.required]),
+                  ageGroup : new FormControl(null, [Validators.required]),
+                })
               }
 
-  
-  // onSubmit(formValues) {
-  //   const currentUser = this.regForm.value;
-  //   this.currentUser = currentUser;
-  //   console.log(this.regForm.value);
-  //   this.currentUser.id = 1;
-  //   this.currentUser.registered = true;
-  //   this.currentUser.reqsStatus = {
-  //     fruitMet: false,
-  //     vegMet: false,
-  //     proteinMet: false,
-  //     grainMet: false
-  //   };
-  //   localStorage.setItem('User', JSON.stringify(currentUser));
-
-  // }
-
   onSubmit(formValues) {
+    this.submit = true;
     this.userService.updateUser(formValues);
     UserService.storeUserLocal(formValues);
+    this.router.navigate(['myPlate']);
   }
 
   ngOnInit(): void {

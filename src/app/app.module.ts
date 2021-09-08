@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TodaysGoalComponent } from './todays-goal/todays-goal.component';
 import { FoodComponent } from './food/food.component';
 import { DoublePipe } from './shared/double.pipe';
+import { FoodGroupsGuardService } from './services/food-groups-guard.service';
 
 
 
@@ -50,6 +51,6 @@ import { DoublePipe } from './shared/double.pipe';
     HttpClientModule
   ],
   bootstrap: [ AppComponent ],
-  providers: [ UserService ]
+  providers: [ UserService, FoodGroupsGuardService ]
 })
 export class AppModule { }
